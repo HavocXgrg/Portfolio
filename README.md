@@ -50,3 +50,32 @@ To run this project locally, follow these steps:
    git clone https://github.com/your-username/your-repo-name.git
    cd your-repo-name
    ```
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**:
+
+   ```bash
+   VITE_API_KEY=your-api-key
+   ```
+
+4. **Run the development server**:
+
+   ```bash
+   npm run dev
+   ```
+
+5. **Build for production:**:
+   ```bash
+   npm run build
+   ```
+
+## Usage
+
+- **Development**: Use npm run dev to start the Vite development server with hot module replacement.
+- **Styling**: Modify styles directly in JSX using Tailwind CSS classes or update the tailwind.config.js for custom configurations.
+- **Animations**: Add or tweak animations in components using Framer Motion’s motion components and hooks.
+- **Deployment**: Deploy the dist folder to platforms like Vercel, Netlify, or GitHub Pages.
