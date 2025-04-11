@@ -1,12 +1,52 @@
-# React + Vite
+# Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive portfolio website built with **React.js**, bundled with **Vite**, styled using **Tailwind CSS**, and animated with **Framer Motion**. This project showcases my skills, projects, and contact information in an engaging and visually appealing way.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Demo](#demo)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-## Expanding the ESLint configuration
+## Demo
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🔗 **[Live Demo](#)** (Replace with your deployed site URL once available)
+
+A screenshot of the portfolio:
+![Portfolio Screenshot](./src/assets/screenshot.png) _(Add a screenshot to your repo and update the path)_
+
+## Features
+
+- **Responsive Design**: Optimized for all devices (desktop, tablet, mobile).
+- **Smooth Animations**: Powered by Framer Motion for engaging transitions and effects.
+- **Fast Performance**: Built with Vite for lightning-fast development and production builds.
+- **Modern Styling**: Utilizes Tailwind CSS for utility-first, customizable styling.
+- **Interactive UI**: Sections for About, Projects, Skills, and Contact with dynamic content.
+- **SEO Optimized**: Structured for better search engine visibility.
+- **Accessible**: Follows web accessibility best practices.
+
+## Technologies Used
+
+- **React.js**: Frontend library for building user interfaces.
+- **Vite**: Next-generation frontend tooling for fast bundling.
+- **Tailwind CSS**: Utility-first CSS framework for rapid styling.
+- **Framer Motion**: Animation library for smooth and declarative animations.
+- **JavaScript (ES6+)**: Core programming language.
+- **HTML5 & CSS3**: Markup and styling foundations.
+- **Git**: Version control for tracking changes.
+
+## Installation
+
+To run this project locally, follow these steps:
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/your-username/your-repo-name.git
+   cd your-repo-name
+   ```
