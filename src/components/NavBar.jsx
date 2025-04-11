@@ -11,21 +11,27 @@ const NavBar = () => {
   const menuToggler = () => {
     setMenuOpen(!menuOpen);
   };
+  //implementation of useEffect hook for
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+    // Cleanup function for unmount phase
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
   return (
-    <nav className="sticky top-0 z-40 backdrop-blur-lg border-b border-white/10">
+    <nav className="sticky top-0 z-40 bg-black/40 backdrop-blur-md border-b border-white/10">
       <div className="relative container m-auto">
         <div className="m-auto flex h-16 justify-between mb-4">
           {/* Logo Section */}
-          <div className="flex flex-shrink-0 items-center ml-18">
+          <div className="flex flex-shrink-0 items-center ml-[18px]">
             <img
-              className="h-24 w-24 mt-4 cursor-pointer scale-120"
+              className="h-24 w-24 mt-6 cursor-pointer scale-120"
               src={BgLogo}
               alt="logo"
             />
+
             <span className="text-white font-[Sour_Gummy] text-2xl tracking-widest">
               PortFolio
             </span>
@@ -35,13 +41,13 @@ const NavBar = () => {
           <NavElements menuOpen={menuOpen} isMobile={false} />
 
           {/* Toggle Button for Mobile with animation */}
-          <div className="md:hidden w-6 h-6 mt-6 mr-4 cursor-pointer hover:bg-[#4aa3bc] transition-colors duration-100 rounded-lg">
+          <div className="md:hidden w-6 h-6 mt-6 mr-4 hover:bg-[#4aa3bc] transition-colors duration-100 rounded-lg">
             <motion.button
               onClick={menuToggler}
               initial={false}
               animate={{ rotate: menuOpen ? 180 : 0 }}
               transition={{ duration: 0.4 }}
-              className="text-white md:hidden focus:outline-none"
+              className="text-white md:hidden focus:outline-none cursor-pointer"
             >
               {menuOpen ? <X /> : <Menu />}
             </motion.button>
@@ -79,7 +85,7 @@ export const NavElements = ({ menuOpen, isMobile }) => {
     >
       {navItems.map((item, index) => (
         <li
-          className="text-white font-[Sour_Gummy] md:text-[16px] text-2xl md:mt-0 mt-8 hover:text-[#4aa3bc]"
+          className="text-white font-[Sour_Gummy] md:text-[16px] text-2xl md:mt-0 mt-8 hover:text-[#4aa3bc] "
           key={index}
         >
           <a href={item.href}>{item.label}</a>
