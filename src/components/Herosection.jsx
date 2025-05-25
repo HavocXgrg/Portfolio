@@ -1,12 +1,13 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import ParticleBackground from "./ParticleBackground";
+import { MdKeyboardDoubleArrowDown } from "react-icons/md";
 
 const Herosection = () => {
   const sectionRef = useRef(null);
 
   // Scroll tracking
-  const { scrollYProgress } = useScroll({
+  const { scrollYProgress, scrollY } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
@@ -15,6 +16,7 @@ const Herosection = () => {
   const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -300]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.002], [1, 0.4]);
+  const arrowOpacity = useTransform(scrollY, [0, 380], [1, 0]);
 
   // Animation variants
   const textVariants = {
@@ -79,6 +81,21 @@ const Herosection = () => {
               Resume
             </button>
           </div>
+          <motion.div
+            className=" absolute flex left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 sm:left-[380px] sm:top-[320px] "
+            style={{ opacity: arrowOpacity }}
+            animate={{
+              y: [-20, 20], // Fall from -20px to +20px
+              opacity: [0.2, 1, 0.2], // Fade from 0.2 to 1 and back
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 1.5,
+              ease: "easeInOut",
+            }}
+          >
+            <MdKeyboardDoubleArrowDown className="text-6xl text-white" />
+          </motion.div>
         </div>
       </div>
     </motion.section>
