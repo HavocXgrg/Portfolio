@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { skillIcons } from "../constant/Constant";
 import { motion, useScroll, useTransform } from "framer-motion";
 import ParticleBackground from "./ParticleBackground";
 import { MdKeyboardDoubleArrowDown } from "react-icons/md";
@@ -12,92 +13,149 @@ const Herosection = () => {
     offset: ["start start", "end start"],
   });
 
-  // Transform mappings
-  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -300]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, -150]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.002], [1, 0.4]);
-  const arrowOpacity = useTransform(scrollY, [0, 380], [1, 0]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, 640]);
+  const contentY = useTransform(scrollYProgress, [0, 0.1, 1], [0, -10, -20]);
+  const contentOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [1, 0.6, 0.5]
+  );
+  const arrowOpacity = useTransform(scrollYProgress, [0, 0.25, 1], [1, 0, 0]);
 
   // Animation variants
-  const textVariants = {
-    initial: { y: -40, scale: 1 },
+  const pulseVariant = {
     animate: {
-      y: 0,
-      scale: 1.1,
-      transition: { duration: 1.5, ease: "easeOut" },
+      scale: [1, 1.05, 1],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
     },
   };
+  const durations = [4, 4.5, 5, 5.5, 6]; //durations in transitions for the skillicons
+
+  // Log scrollYProgress in real-time
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (value) => {
+      console.log("scrollYProgress:", value);
+    });
+    return () => unsubscribe(); // Clean up the listener
+  }, [scrollYProgress]);
   return (
-    <motion.section id="hero" ref={sectionRef} className="h-[100vh] relative ">
-      <ParticleBackground className="particle-background " />
-      <div className="h-[100vh] w-full flex relative">
-        <motion.img //background image
-          style={{ y: backgroundY }}
-          className="h-full w-full object-cover opacity-[0.3] absolute top-0 left-0 "
+    <motion.section
+      id="hero"
+      ref={sectionRef}
+      className="relative md:min-h-screen h-[89vh] overflow-hidden"
+    >
+      {console.log(scrollYProgress)}
+      {/* Background Image */}
+      <motion.div
+        className="absolute inset-0 overflow-hidden" // Contains particles
+        style={{ y: backgroundY }}
+      >
+        <motion.img
+          className="w-full md:h-full h-[145%]  object-cover opacity-30"
           src="src/assets/particles.jpg"
-          alt="background-img"
+          alt="abstract background"
         />
-        <div>
+
+        {/* Particle Background */}
+        <div className="absolute inset-0 z-10">
+          <ParticleBackground />
+        </div>
+      </motion.div>
+
+      {/* Content Container */}
+      <motion.div
+        className="relative z-20 flex flex-col justify-between h-full px-4 py-2 md:py-12 md:px-8 "
+        style={{
+          y: contentY,
+          opacity: contentOpacity,
+        }}
+      >
+        {/* Header Section */}
+        <motion.header className="text-center ">
           <motion.h1
-            variants={textVariants}
+            variants={pulseVariant}
             initial="initial"
             animate="animate"
-            style={{ y: textY, opacity: textOpacity }}
-            className="absolute md:top-[8%] top-[2%] left-[50%] transform -translate-x-[50%] w-fit
-            "
+            className="text-2xl md:text-5xl font-bold tracking-wider"
           >
-            <span
-              className=" md:text-[56px] text-2xl font-[freightbigcmp-pro] tracking-widest animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 
-                           drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]"
-            >
-              Welcome To My Site...
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
+              Welcome To My Portfolio
             </span>
           </motion.h1>
-        </div>
-        <div className=" absolute top-[30%] left-[20%]  ">
-          <p className="md:text-4xl ">
-            {" "}
-            Hello, This is{" "}
-            <span className="text-purple-500">Bishwa Gurung</span>.
-          </p>
-          <p className="mt-6 text-[#f6fbcb] md:text-xl  ">
-            I am a Full Stack Developer | React | NextJS | NodeJS | MongoDB
-          </p>
-          <div className="ml-[20%] ">
-            <button
-              type="button"
-              className=" mt-8 rounded-full cursor-pointer border-2 border-white bg-transparent px-4 py-2 text-white 
-               hover:bg-[#046a87]  hover:text-amber-50 focus:outline-none focus:ring-2 focus:ring-blue-400 
-               transition-all duration-300 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]"
-            >
-              Github
-            </button>
-            <button
-              type="button"
-              className=" mt-8 ml-[20px] rounded-full cursor-pointer border-2 border-white bg-transparent px-4 py-2 text-white 
-               hover:bg-[#046a87]  hover:text-amber-50 focus:outline-none focus:ring-2 focus:ring-blue-400 
-               transition-all duration-300 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]"
-            >
-              Resume
-            </button>
+        </motion.header>
+
+        {/* Main Content */}
+        <motion.div className="flex items-center justify-center min-h-[30vh] mb-36 md:mb-0  ">
+          <div className="max-w-3xl text-center mt-14">
+            <p className="text-2xl md:text-4xl mb-4">
+              Hello, I'm{" "}
+              <span className="text-purple-500 font-medium">Bishwa Gurung</span>
+            </p>
+            <p className="text-lg md:text-xl text-blue-200 mb-8">
+              Web Developer | Front-End
+            </p>
+            {/* skills icon grid */}
+            <div className="grid grid-cols-5 gap-10 md:mt-18">
+              {skillIcons.map((skill, index) => (
+                <motion.div
+                  key={index}
+                  // className="flex flex-col items-center"
+                  animate={{
+                    y: [0, 22, 0], // Float up and down (22px)
+                    scale: [1, 0.9, 1], // Pulse from normal to 120% size
+                  }}
+                  transition={{
+                    duration: durations[index], // Unique duration for each icon
+                    repeat: Infinity, // Loop forever
+                    ease: "easeInOut", // Smooth easing
+                    delay: index * 0.2, // Staggered start (0.2s apart)
+                    times: [0, 0.5, 1], // Keyframe timing (halfway for peak)
+                  }}
+                >
+                  <div className={`${skill.color} mb-2`}>{skill.icon}</div>
+                  <span className="text-white text-sm ">{skill.name}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="flex justify-center gap-4 md:mt-24 mt-18 ">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 py-2 rounded-full border-2 border-white bg-transparent text-white hover:bg-blue-600 transition-colors cursor-pointer"
+              >
+                GitHub
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 py-2 rounded-full border-2 border-white bg-transparent text-white hover:bg-purple-500 transition-colors cursor-pointer"
+              >
+                Resume
+              </motion.button>
+            </div>
           </div>
-          <motion.div
-            className=" absolute flex left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 sm:left-[380px] sm:top-[320px] "
-            style={{ opacity: arrowOpacity }}
-            animate={{
-              y: [-20, 20], // Fall from -20px to +20px
-              opacity: [0.2, 1, 0.2], // Fade from 0.2 to 1 and back
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 1.5,
-              ease: "easeInOut",
-            }}
-          >
-            <MdKeyboardDoubleArrowDown className="text-6xl text-white" />
-          </motion.div>
-        </div>
-      </div>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          className="flex justify-center md:py-6 md:mb-0 mb-12 "
+          style={{ opacity: arrowOpacity }}
+          animate={{ y: [-10, 10] }}
+          transition={{
+            repeat: Infinity,
+            repeatType: "mirror",
+            duration: 1.5,
+            ease: "easeInOut",
+          }}
+        >
+          <MdKeyboardDoubleArrowDown className="text-4xl md:text-6xl text-white " />
+        </motion.div>
+      </motion.div>
     </motion.section>
   );
 };
