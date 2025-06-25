@@ -1,10 +1,10 @@
 import Particles from "react-tsparticles";
 import { useCallback } from "react";
-import { loadSlim } from "tsparticles-slim"; // Use loadSlim for smaller bundle size
+import { loadSlim } from "tsparticles-slim";
 
 const ParticleBackground = ({ className }) => {
   const particlesInit = useCallback(async (engine) => {
-    await loadSlim(engine); // Load slim version of tsparticles
+    await loadSlim(engine);
   }, []);
 
   return (
@@ -15,42 +15,34 @@ const ParticleBackground = ({ className }) => {
       options={{
         background: {
           color: {
-            value: "#000", // Background color
+            value: "transparent",
           },
         },
         fpsLimit: 120,
         interactivity: {
+          // Disabled all interactive effects
+          detect_on: "canvas",
           events: {
-            onClick: {
-              enable: true,
-              mode: "push",
-            },
-            onHover: {
-              enable: true,
-              mode: "repulse",
-            },
+            onClick: { enable: false },
+            onHover: { enable: false },
             resize: true,
           },
           modes: {
-            push: {
-              quantity: 2,
-            },
-            repulse: {
-              distance: 150,
-              duration: 0.4,
-            },
+            // Empty modes to prevent any interactions
+            push: { quantity: 0 },
+            repulse: { distance: 0 },
           },
         },
         particles: {
           color: {
-            value: "#ffffff", // Dot color
+            value: "#ffffff",
           },
           links: {
             color: "#ffffff",
-            distance: 150,
+            distance: 120, // Reduced link distance
             enable: true,
-            opacity: 0.5,
-            width: 1,
+            opacity: 0.5, // Reduced opacity
+            width: 0.8, // Thinner links
           },
           collisions: {
             enable: true,
@@ -62,7 +54,7 @@ const ParticleBackground = ({ className }) => {
               default: "bounce",
             },
             random: false,
-            speed: 2,
+            speed: 1.5, // Slower movement
             straight: false,
           },
           number: {
@@ -70,16 +62,18 @@ const ParticleBackground = ({ className }) => {
               enable: true,
               area: 800,
             },
-            value: 80,
+            value: 60, // Fixed particle count
           },
           opacity: {
-            value: 0.4,
+            value: 0.3, // More transparent
+            random: false,
           },
           shape: {
             type: "circle",
           },
           size: {
-            value: { min: 1, max: 5 },
+            value: { min: 1, max: 3 }, // Smaller particles
+            random: true,
           },
         },
         detectRetina: true,
