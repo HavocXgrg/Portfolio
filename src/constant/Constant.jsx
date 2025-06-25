@@ -1,11 +1,9 @@
 import { FaReact, FaHtml5, FaDatabase } from "react-icons/fa";
-import { SiMongodb } from "react-icons/si";
 import { RiTailwindCssFill, RiJavascriptFill } from "react-icons/ri";
 
 export const navItems = [
   { label: "Home", href: "#" },
-  { label: "About Me", href: "#about" },
-  { label: "Skills", href: "#skills" },
+  { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Contacts", href: "#contact" },
 ];
