@@ -56,7 +56,7 @@ const Herosection = () => {
       >
         <motion.img
           className="w-full md:h-full h-[145%]  object-cover opacity-30"
-          src="src/assets/particles.jpg"
+          src="src/assets/particles.webp"
           alt="abstract background"
         />
 
