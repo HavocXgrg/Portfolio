@@ -3,6 +3,7 @@ import { skillIcons } from "../constant/Constant";
 import { motion, useScroll, useTransform } from "framer-motion";
 import ParticleBackground from "./ParticleBackground";
 import { MdKeyboardDoubleArrowDown } from "react-icons/md";
+import particleBg from "../assets/particles.webp";
 
 const Herosection = () => {
   const sectionRef = useRef(null);
@@ -56,7 +57,7 @@ const Herosection = () => {
       >
         <motion.img
           className="w-full md:h-full h-[145%]  object-cover opacity-30"
-          src="src/assets/particles.webp"
+          src={particleBg}
           alt="abstract background"
         />
 
