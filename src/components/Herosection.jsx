@@ -14,7 +14,7 @@ const Herosection = () => {
   });
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], [0, 640]);
-  const contentY = useTransform(scrollYProgress, [0, 0.1, 1], [0, -10, -20]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -20]);
   const contentOpacity = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
@@ -93,7 +93,9 @@ const Herosection = () => {
           <div className="max-w-3xl text-center mt-14">
             <p className="text-2xl md:text-4xl mb-4">
               Hello, I'm{" "}
-              <span className="text-purple-500 font-medium">Bishwa Gurung</span>
+              <span className="text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text font-semibold animate-gradient-smooth">
+                Bishwa Gurung
+              </span>
             </p>
             <p className="text-lg md:text-xl text-blue-200 mb-8">
               Web Developer | Front-End
